@@ -1,30 +1,30 @@
 import React, { Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
-import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
+// import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import Header from '../components/Header'
-import Polling from '../components/Header/Polling'
-import URLWarning from '../components/Header/URLWarning'
-import Popups from '../components/Popups'
-import Web3ReactManager from '../components/Web3ReactManager'
-import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
-import AddLiquidity from './AddLiquidity'
-import {
-  RedirectDuplicateTokenIds,
-  RedirectOldAddLiquidityPathStructure,
-  RedirectToAddLiquidity
-} from './AddLiquidity/redirects'
-import EarnTri from './EarnTri'
-import Pool from './Pool'
-import PoolFinder from './PoolFinder'
-import RemoveLiquidity from './RemoveLiquidity'
-import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
-import Swap from './Swap'
-import StableSwapPool from './StableSwapPool'
-import StableSwapPoolAddLiquidity from './StableSwapPoolAddLiquidity'
-import StableSwapPoolRemoveLiquidity from './StableSwapPoolRemoveLiquidity'
-import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
-import StakeTri from './StakeTri'
+// import Polling from '../components/Header/Polling'
+// import URLWarning from '../components/Header/URLWarning'
+// import Popups from '../components/Popups'
+// import Web3ReactManager from '../components/Web3ReactManager'
+// import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
+// import AddLiquidity from './AddLiquidity'
+// import {
+//   RedirectDuplicateTokenIds,
+//   RedirectOldAddLiquidityPathStructure,
+//   RedirectToAddLiquidity
+// } from './AddLiquidity/redirects'
+// import EarnTri from './EarnTri'
+// import Pool from './Pool'
+// import PoolFinder from './PoolFinder'
+// import RemoveLiquidity from './RemoveLiquidity'
+// import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
+// import Swap from './Swap'
+// import StableSwapPool from './StableSwapPool'
+// import StableSwapPoolAddLiquidity from './StableSwapPoolAddLiquidity'
+// import StableSwapPoolRemoveLiquidity from './StableSwapPoolRemoveLiquidity'
+// import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
+// import StakeTri from './StakeTri'
 import Landing from './Landing'
 
 const AppWrapper = styled.div`
@@ -66,18 +66,18 @@ const Marginer = styled.div`
 export default function App() {
   return (
     <Suspense fallback={null}>
-      <Route component={GoogleAnalyticsReporter} />
-      <Route component={DarkModeQueryParamReader} />
+      {/* <Route component={GoogleAnalyticsReporter} /> */}
+      {/* <Route component={DarkModeQueryParamReader} /> */}
       <AppWrapper>
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>
         <BodyWrapper>
-          <Popups />
-          <Polling />
-          <Web3ReactManager>
-            <Switch>
-              <Route exact strict path="/swap" component={Swap} />
+          {/* <Popups />
+          <Polling /> */}
+          {/* <Web3ReactManager> */}
+          <Switch>
+            {/* <Route exact strict path="/swap" component={Swap} />
               <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
               <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
               <Route exact strict path="/find" component={PoolFinder} />
@@ -100,11 +100,11 @@ export default function App() {
               <Route exact path="/create/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
               <Route exact path="/create/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
               <Route exact strict path="/remove/:tokens" component={RedirectOldRemoveLiquidityPathStructure} />
-              <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
-              <Route exact strict path="/" component={Landing} />
-              <Route component={RedirectPathToSwapOnly} />
-            </Switch>
-          </Web3ReactManager>
+              <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} /> */}
+            <Route exact strict path="/" component={Landing} />
+            {/* <Route component={RedirectPathToSwapOnly} /> */}
+          </Switch>
+          {/* </Web3ReactManager> */}
           <Marginer />
         </BodyWrapper>
       </AppWrapper>

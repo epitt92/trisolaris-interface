@@ -103,5 +103,6 @@ export function useApproveCallbackFromTrade(trade?: Trade, allowedSlippage = 0) 
     () => (trade ? computeSlippageAdjustedAmounts(trade, allowedSlippage)[Field.INPUT] : undefined),
     [trade, allowedSlippage]
   )
+  // @ts-ignore
   return useApproveCallback(amountToApprove, chainId ? ROUTER_ADDRESS[chainId] : ROUTER_ADDRESS[ChainId.POLYGON])
 }

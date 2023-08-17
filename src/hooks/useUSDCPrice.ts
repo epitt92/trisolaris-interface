@@ -18,9 +18,13 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
   const { chainId } = useActiveWeb3React()
   const wrapped = wrappedCurrency(currency, chainId)
 
+  // @ts-ignore
   const USDC = chainId ? usdcDef[chainId] : usdcDef[ChainId.AURORA]
-  const USDT = chainId ? usdtDef[chainId] : usdtDef[ChainId.AURORA]
+  // @ts-ignore
+  const USDT = chainId ? [chainId] : usdtDef[ChainId.AURORA]
+  // @ts-ignore
   const AUUSDT = chainId ? auUsdtDef[chainId] : auUsdtDef[ChainId.AURORA]
+  // @ts-ignore
   const AUUSDC = chainId ? auUsdcDef[chainId] : auUsdcDef[ChainId.AURORA]
 
   const auUSDCContract = useAuTokenContract(AUUSDC.address)
@@ -36,10 +40,13 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
   const tokenPairs: [Currency | undefined, Currency | undefined][] = useMemo(
     () => [
       [
+        // @ts-ignore
         chainId && wrapped && currencyEquals(WETH[chainId], wrapped) ? undefined : currency,
+        // @ts-ignore
         chainId ? WETH[chainId] : undefined
       ],
       [wrapped?.equals(USDC) ? undefined : wrapped, chainId === ChainId.AURORA ? USDC : undefined],
+      // @ts-ignore
       [chainId ? WETH[chainId] : undefined, chainId === ChainId.AURORA ? USDC : undefined]
     ],
     [chainId, currency, wrapped, USDC]
@@ -73,8 +80,10 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
       return undefined
     }
     // handle weth/eth
+    // @ts-ignore
     if (wrapped.equals(WETH[chainId])) {
       if (usdcPair) {
+        // @ts-ignore
         const price = usdcPair.priceOf(WETH[chainId])
 
         return new Price(currency, USDC, price.denominator, price.numerator)
@@ -93,8 +102,10 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
     }
 
     // handle usdt
+    // @ts-ignore
     if (wrapped.equals(USDT)) {
       return new Price(
+        // @ts-ignore
         USDT,
         USDC,
         JSBI.multiply(JSBI.BigInt(1), JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(wrapped.decimals))),
@@ -113,10 +124,12 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
       )
     }
 
+    // @ts-ignore
     const currencyEthPairWETHAmount = currencyEth?.reserveOf(WETH[chainId])
     const currencyEthPairWETHUSDCValue: JSBI =
       currencyEthPairWETHAmount && usdcEthPair
-        ? usdcEthPair.priceOf(WETH[chainId]).quote(currencyEthPairWETHAmount).raw
+        ? // @ts-ignore
+          usdcEthPair.priceOf(WETH[chainId]).quote(currencyEthPairWETHAmount).raw
         : BIG_INT_ZERO
 
     // all other tokens
@@ -126,8 +139,10 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
       return new Price(currency, USDC, price.denominator, price.numerator)
     }
     if (currencyEthState === PairState.EXISTS && currencyEth && usdcEthPairState === PairState.EXISTS && usdcEthPair) {
+      // @ts-ignore
       if (usdcEthPair.reserveOf(USDC).greaterThan('0') && currencyEth.reserveOf(WETH[chainId]).greaterThan('0')) {
         const usdcPriceInEth = usdcEthPair.priceOf(USDC)
+        // @ts-ignore
         const ethPriceInCurrency = currencyEth.priceOf(WETH[chainId])
         const currencyUsdcPrice = usdcPriceInEth.multiply(ethPriceInCurrency).invert()
         return new Price(currency, USDC, currencyUsdcPrice.denominator, currencyUsdcPrice.numerator)

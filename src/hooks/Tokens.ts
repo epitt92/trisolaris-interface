@@ -34,6 +34,7 @@ export function useAllTokens(): TokensMap {
           },
           // must make a copy because reduce modifies the map, and we do not
           // want to make a copy in every iteration
+          // @ts-ignore
           { ...allTokens[chainId] }
         )
     )
@@ -63,6 +64,7 @@ export function useAllStableSwapTokens(): TokensMap {
       },
       new Set()
     )
+    // @ts-ignore
     const validStableTokens = _.filter(allTokens[chainId], token => validStablesSet.has(token.address))
 
     return validStableTokens
@@ -88,6 +90,7 @@ export function useAllValidStableSwapOutputTokens(): TokensMap {
       outputTokens.filter(item => item.type !== STABLE_SWAP_TYPES.INVALID).map(token => token.to.address)
     )
 
+    // @ts-ignore
     const validStableTokens = _.filter(allTokens[chainId], token => outputTokensSet.has(token.address))
 
     return validStableTokens

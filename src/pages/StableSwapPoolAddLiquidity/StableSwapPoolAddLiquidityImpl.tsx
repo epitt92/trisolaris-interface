@@ -50,7 +50,7 @@ type Props = {
 
 export default function StableSwapPoolAddLiquidityImpl({ stableSwapPoolName }: Props) {
   const { t } = useTranslation()
-  const { account, chainId, library } = useActiveWeb3React()
+  const { account, chainId, provider } = useActiveWeb3React()
   const [poolData, _userShareData] = useStablePoolsData(stableSwapPoolName)
   const { disableAddLiquidity, friendlyName, virtualPrice, name } = poolData
   const [allowedSlippage] = useUserSlippageTolerance()
@@ -102,7 +102,7 @@ export default function StableSwapPoolAddLiquidityImpl({ stableSwapPoolName }: P
   const { maxAmounts, atMaxAmounts, atHalfAmounts } = getMaxAmounts({ currencyBalances, parsedAmounts })
 
   async function onAdd() {
-    if (!chainId || !library || !account) {
+    if (!chainId || !provider || !account) {
       return
     }
 

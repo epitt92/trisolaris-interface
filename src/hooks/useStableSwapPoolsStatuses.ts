@@ -40,7 +40,9 @@ export default function useStableSwapPoolsStatuses(): StableSwapPoolStatuses {
     'paused'
   )?.map(({ result }) => result?.[0] ?? FALLBACK_PAUSE_STATUS)
 
+  // @ts-ignore
   const btcPrice = useUSDCPrice(WBTC[chainId ?? ChainId.AURORA])
+  // @ts-ignore
   const ethPrice = useUSDCPrice(WETH[chainId ?? ChainId.AURORA])
 
   const tvlsUSD = useMemo(() => {

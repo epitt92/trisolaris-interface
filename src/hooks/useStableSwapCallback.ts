@@ -93,14 +93,14 @@ export function useStableSwapCallback(
   trade: StableSwapTrade | undefined, // trade to execute, required
   allowedSlippage: number = INITIAL_ALLOWED_SLIPPAGE // in bips
 ): { state: StableSwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
-  const { account, chainId, library } = useActiveWeb3React()
+  const { account, chainId, provider } = useActiveWeb3React()
 
   const StableswapCalls = useStableSwapCallArguments(trade, allowedSlippage)
 
   const addTransaction = useTransactionAdder()
 
   return useMemo(() => {
-    if (!trade || !library || !account || !chainId) {
+    if (!trade || !provider || !account || !chainId) {
       return { state: StableSwapCallbackState.INVALID, callback: null, error: 'Missing dependencies' }
     }
 
@@ -197,5 +197,5 @@ export function useStableSwapCallback(
       },
       error: null
     }
-  }, [trade, library, account, chainId, StableswapCalls, addTransaction])
+  }, [trade, provider, account, chainId, StableswapCalls, addTransaction])
 }
