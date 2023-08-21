@@ -10,7 +10,7 @@ import {
   useConnectors
 } from '../../connectors'
 import { ReactNode, useEffect } from 'react'
-import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React, useEagerConnect } from '../../hooks'
 // import { useAppSelector } from 'state/hooks'
 
 const connect = async (connector: Connector) => {
@@ -33,6 +33,7 @@ export default function Web3Provider({ children }: { children: ReactNode }) {
   const connectors = useConnectors(undefined)
   useEffect(() => {
     // connect(gnosisSafe)
+
     connect(network)
 
     // if (selectedWallet) {

@@ -27,7 +27,7 @@ import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import StakeTri from './StakeTri'
 import Landing from './Landing'
 import { Connector } from '@web3-react/types'
-import { useActiveWeb3React } from '../hooks'
+import { useActiveWeb3React, useEagerConnect } from '../hooks'
 import { NETWORK_CHAIN_ID, network } from '../connectors'
 
 const AppWrapper = styled.div`
@@ -67,25 +67,8 @@ const Marginer = styled.div`
 `
 
 export default function App() {
-  const connect = async (connector: Connector) => {
-    try {
-      if (connector.connectEagerly) {
-        await connector.connectEagerly()
-      } else {
-        await connector.activate()
-      }
-    } catch (error) {
-      console.debug(`web3-react eager connection error: ${error}`)
-    }
-  }
-  const { chainId, account, connector } = useActiveWeb3React()
-  useEffect(() => {
-    if (!account || chainId !== NETWORK_CHAIN_ID) {
-      // connect(network)
-      // @ts-ignore
-      console.log('wrong network', network, connector)
-    }
-  }, [chainId, account])
+  const triedEager = useEagerConnect()
+
   return (
     <Suspense fallback={null}>
       <Route component={GoogleAnalyticsReporter} />
