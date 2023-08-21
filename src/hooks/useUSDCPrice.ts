@@ -19,13 +19,17 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
   const wrapped = wrappedCurrency(currency, chainId)
 
   // @ts-ignore
-  const USDC = chainId ? usdcDef[chainId] : usdcDef[ChainId.AURORA]
+  // const USDC = chainId ? usdcDef[chainId] : usdcDef[ChainId.AURORA]
+  const USDC = usdcDef[ChainId.AURORA]
   // @ts-ignore
-  const USDT = chainId ? [chainId] : usdtDef[ChainId.AURORA]
+  // const USDT = chainId ? [chainId] : usdtDef[ChainId.AURORA]
+  const USDT = usdtDef[ChainId.AURORA]
   // @ts-ignore
-  const AUUSDT = chainId ? auUsdtDef[chainId] : auUsdtDef[ChainId.AURORA]
+  // const AUUSDT = chainId ? auUsdtDef[chainId] : auUsdtDef[ChainId.AURORA]
+  const AUUSDT = auUsdtDef[ChainId.AURORA]
   // @ts-ignore
-  const AUUSDC = chainId ? auUsdcDef[chainId] : auUsdcDef[ChainId.AURORA]
+  // const AUUSDC = chainId ? auUsdcDef[chainId] : auUsdcDef[ChainId.AURORA]
+  const AUUSDC = auUsdcDef[ChainId.AURORA]
 
   const auUSDCContract = useAuTokenContract(AUUSDC.address)
   const auUSDTContract = useAuTokenContract(AUUSDT.address)

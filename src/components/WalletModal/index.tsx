@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import MetamaskIcon from '../../assets/images/metamask.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
 // import { injected, NETWORK_CHAIN_ID } from '../../connectors'
-import { getWalletForConnector, injected } from '../../connectors'
+import { NETWORK_CHAIN_ID, getWalletForConnector, injected } from '../../connectors'
 import { SUPPORTED_WALLETS, CHAIN_PARAMS } from '../../constants'
 // import usePrevious from '../../hooks/usePrevious'
 import { ApplicationModal } from '../../state/application/actions'
@@ -23,6 +23,7 @@ import PendingView from './PendingView'
 import { useTranslation } from 'react-i18next'
 import { ChainId } from '@trisolaris/sdk'
 import { isBraveWallet, isMetamask } from '../../utils'
+import useSelectChain from '../../hooks/useSelectChain'
 
 // import { useAppDispatch, useAppSelector } from '../../state/application/hooks'
 // import { updateSelectedWallet } from '../../state/application/reducer'
@@ -138,7 +139,7 @@ export default function WalletModal({
   // important that these are destructed from the account-specific web3-react context
   // const { active, account, connector, activate, error } = useWeb3React()
   // const dispatch = useAppDispatch()
-  const { connector, account } = useWeb3React()
+  const { connector, account, chainId } = useWeb3React()
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
@@ -344,56 +345,56 @@ export default function WalletModal({
     })
   }
 
-  // async function addNetwork() {
-  //   const chainID: ChainId = '1' // n-error
-  //   const provider = await injected.getProvider()
-  //   try {
-  //     try {
-  //       await provider.request({
-  //         method: 'wallet_switchEthereumChain',
-  //         params: [{ chainId: CHAIN_PARAMS[chainID].chainId }]
-  //       })
-  //     } catch (e) {
-  //       // This error code indicates that the chain has not been added to MetaMask.
-  //       if ((e as any)?.code !== 4902) {
-  //         throw e
-  //       }
+  const selectChain = useSelectChain()
+  async function addNetwork() {
+    const chainID: ChainId = 1313161554 // n-
+    return selectChain()
+    // const provider = await injected.provider
+    // if (!provider) return
+    // try {
+    //   try {
+    //     await provider.request({
+    //       method: 'wallet_switchEthereumChain',
+    //       params: [{ chainId: CHAIN_PARAMS[chainID].chainId }]
+    //     })
+    //   } catch (e) {
+    //     // This error code indicates that the chain has not been added to MetaMask.
+    //     if ((e as any)?.code !== 4902) {
+    //       throw e
+    //     }
 
-  //       await provider.request({
-  //         method: 'wallet_addEthereumChain',
-  //         params: [CHAIN_PARAMS[chainID]]
-  //       })
-  //     }
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
-  // }
+    //     await provider.request({
+    //       method: 'wallet_addEthereumChain',
+    //       params: [CHAIN_PARAMS[chainID]]
+    //     })
+    //   }
+    // } catch (e) {
+    //   console.error(e)
+    // }
+  }
 
   function getModalContent() {
-    // if (error) {
-    //   return (
-    //     <UpperSection>
-    //       <CloseIcon onClick={toggleWalletModal}>
-    //         <CloseColor />
-    //       </CloseIcon>
-    //       <HeaderRow>
-    //         {error instanceof UnsupportedChainIdError
-    //           ? t('walletModal.wrongNetwork')
-    //           : t('walletModal.errorConnecting')}
-    //       </HeaderRow>
-    //       <ContentWrapper>
-    //         {error instanceof UnsupportedChainIdError ? (
-    //           <>
-    //             <h5>{`${t('Please connect to')}:`}</h5>
-    //             {isMetamask() && <ButtonLight onClick={addNetwork}>{t('walletModal.switchNetwork')}</ButtonLight>}
-    //           </>
-    //         ) : (
-    //           t('walletModal.errorConnectingRefresh')
-    //         )}
-    //       </ContentWrapper>
-    //     </UpperSection>
-    //   )
-    // }
+    console.log(chainId, NETWORK_CHAIN_ID)
+    if (chainId !== NETWORK_CHAIN_ID) {
+      return (
+        <UpperSection>
+          <CloseIcon onClick={toggleWalletModal}>
+            <CloseColor />
+          </CloseIcon>
+          <HeaderRow>{t('walletModal.wrongNetwork')}</HeaderRow>
+          <ContentWrapper>
+            {connector === injected ? (
+              <>
+                <h5>{`${t('Please connect to')}:`}</h5>
+                {isMetamask() && <ButtonLight onClick={addNetwork}>{t('walletModal.switchNetwork')}</ButtonLight>}
+              </>
+            ) : (
+              <h5>{`${'Please connect to Aurora network in your wallet settings.'}`}</h5>
+            )}
+          </ContentWrapper>
+        </UpperSection>
+      )
+    }
     if (walletView === WALLET_VIEWS.ACCOUNT) {
       return (
         <AccountDetails

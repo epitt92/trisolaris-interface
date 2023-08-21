@@ -185,7 +185,7 @@ export const CHAIN_PARAMS = {
     blockExplorerUrls: ['https://polygonscan.com/']
   },
   [ChainId.AURORA]: {
-    chainId: '0x4e454152', // A 0x-prefixed hexadecimal chainId
+    chainId: '4e454152', // A 0x-prefixed hexadecimal chainId
     chainName: 'Aurora Mainnet',
     nativeCurrency: {
       name: 'ETH',

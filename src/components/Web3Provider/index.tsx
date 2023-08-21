@@ -1,7 +1,8 @@
-import { Web3ReactProvider } from '@web3-react/core'
+import { Web3ReactProvider, useWeb3React } from '@web3-react/core'
 import { Connector } from '@web3-react/types'
 import { BACKFILLABLE_WALLETS, getConnectorForWallet, gnosisSafe, network, useConnectors } from '../../connectors'
 import { ReactNode, useEffect } from 'react'
+import { useActiveWeb3React } from '../../hooks'
 // import { useAppSelector } from 'state/hooks'
 
 const connect = async (connector: Connector) => {

@@ -1,6 +1,5 @@
 import { CoinbaseWallet } from '@web3-react/coinbase-wallet'
 import { initializeConnector, Web3ReactHooks } from '@web3-react/core'
-import { EIP1193 } from '@web3-react/eip1193'
 import { GnosisSafe } from '@web3-react/gnosis-safe'
 import { MetaMask } from '@web3-react/metamask'
 import { Network } from '@web3-react/network'
@@ -8,7 +7,6 @@ import { Connector } from '@web3-react/types'
 import { WalletConnect, WalletConnectConstructorArgs } from '@web3-react/walletconnect-v2'
 // import { SupportedChainId } from 'constants/chains'
 import { useMemo } from 'react'
-import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 
 const NETWORK_URL = process.env.REACT_APP_NETWORK_URL ?? ''
 
@@ -23,18 +21,18 @@ const appLogoUrl = 'https://raw.githubusercontent.com/trisolaris-labs/interface/
 //   defaultChainId: NETWORK_CHAIN_ID
 // })
 
-let networkLibrary: undefined
-export function getNetworkLibrary(): Web3Provider {
-  // @ts-ignore
-  return null
-}
+// let networkLibrary: undefined
+// export function getNetworkLibrary(): Web3Provider | undefined {
+//   const { provider } = useActiveWeb3React()
+//   return provider
+// }
 
 // export const injected = new InjectedConnector({
-//   supportedChainIds: [1313161554]
+//   supportedChainIds: [NETWORK_CHAIN_ID]
 // })
 
 // export const brave = new InjectedConnector({
-//   supportedChainIds: [1313161554]
+//   supportedChainIds: [NETWORK_CHAIN_ID]
 // })
 
 // export const walletlink = new WalletLinkConnector({
@@ -45,7 +43,7 @@ export function getNetworkLibrary(): Web3Provider {
 
 // export const walletconnect = new WalletConnectConnector({
 //   rpc: {
-//     1313161554: NETWORK_URL
+//     NETWORK_CHAIN_ID: NETWORK_URL
 //   },
 //   qrcode: true,
 //   bridge: 'https://bridge.walletconnect.org'
@@ -118,9 +116,9 @@ export const [network, networkHooks] = initializeConnector<Network>(
     new Network({
       actions,
       urlMap: {
-        1313161554: NETWORK_URL
+        [NETWORK_CHAIN_ID]: NETWORK_URL
       },
-      defaultChainId: 1
+      defaultChainId: NETWORK_CHAIN_ID
     })
 )
 
@@ -134,7 +132,7 @@ export const [walletConnect, walletConnectHooks] = initializeConnector<WalletCon
       actions,
       options: {
         projectId: '03219a485a6a9df1269c77f5b2f8c6d9',
-        chains: [1313161554],
+        chains: [NETWORK_CHAIN_ID],
         showQrModal: true
       }
     })

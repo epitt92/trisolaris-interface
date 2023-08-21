@@ -6,7 +6,7 @@ import { Activity } from 'react-feather'
 import { useTranslation } from 'react-i18next'
 import styled, { css } from 'styled-components'
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
-import { coinbaseWallet, injected, walletConnect, getWalletForConnector } from '../../connectors'
+import { coinbaseWallet, injected, walletConnect, getWalletForConnector, NETWORK_CHAIN_ID } from '../../connectors'
 import { NetworkContextName } from '../../constants'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { isTransactionRecent, useAllTransactions } from '../../state/transactions/hooks'
@@ -151,7 +151,7 @@ function Web3StatusInner() {
   const hasPendingTransactions = !!pending.length
   const toggleWalletModal = useWalletModalToggle()
 
-  if (account) {
+  if (account && chainId === NETWORK_CHAIN_ID) {
     return (
       <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
         {hasPendingTransactions ? (
@@ -168,6 +168,13 @@ function Web3StatusInner() {
         )}
         {!hasPendingTransactions && connector && <StatusIcon connector={connector} />}
       </Web3StatusConnected>
+    )
+  } else if (chainId !== NETWORK_CHAIN_ID) {
+    return (
+      <Web3StatusError onClick={toggleWalletModal}>
+        <NetworkIcon />
+        <Text>{t('web3Status.wrongNetwork')}</Text>
+      </Web3StatusError>
     )
   } else {
     return (

@@ -5,15 +5,15 @@ import { updateBlockNumber } from './actions'
 import { useDispatch } from 'react-redux'
 import useTimeout from '../../hooks/useTimeout'
 import useDebounce from '../../hooks/useDebounce'
-import { getNetworkLibrary } from '../../connectors'
+// import { getNetworkLibrary } from '../../connectors'
 
 const MAX_WAIT_BEFORE_MANUAL_DISPATCH = 2000
 
 export default function Updater(): null {
-  const networkLibrary = getNetworkLibrary()
-  const { chainId } = useActiveWeb3React()
+  // const networkLibrary = getNetworkLibrary()
+  const { provider, chainId } = useActiveWeb3React()
   const dispatch = useDispatch()
-
+  const networkLibrary = provider
   const windowVisible = useIsWindowVisible()
 
   const [state, setState] = useState<{ chainId: number | undefined; blockNumber: number | null }>({
