@@ -10,7 +10,7 @@ import { useFarmContractsForStableSwap } from './useFarmContractsForStableSwap'
 export function useFarms(): StakingTri[] {
   const { chainId } = useActiveWeb3React()
 
-  const activeFarms = STAKING[chainId ?? ChainId.AURORA]
+  const activeFarms = STAKING[ChainId.AURORA]
   const farms = useFarmsAPI()
   const stakingInfoV1 = useFarmContractsForVersion(ChefVersions.V1)
   const stakingInfoV2 = useFarmContractsForVersion(ChefVersions.V2)

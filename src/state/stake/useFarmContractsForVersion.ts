@@ -13,7 +13,7 @@ import { STABLESWAP_POOLS } from '../stableswap/constants'
 export function useFarmContractsForVersion(chefVersion: ChefVersions): StakingTriStakedAmounts[] {
   const { chainId, account } = useActiveWeb3React()
 
-  const activeFarms = STAKING[chainId ?? ChainId.AURORA]
+  const activeFarms = STAKING[ChainId.AURORA]
   // TODO: Add code back when implementing solution for incorrect farms data.
   // Ignore all stable farms
 

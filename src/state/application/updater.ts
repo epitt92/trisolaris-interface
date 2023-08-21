@@ -5,6 +5,7 @@ import { updateBlockNumber } from './actions'
 import { useDispatch } from 'react-redux'
 import useTimeout from '../../hooks/useTimeout'
 import useDebounce from '../../hooks/useDebounce'
+import { network } from '../../connectors'
 // import { getNetworkLibrary } from '../../connectors'
 
 const MAX_WAIT_BEFORE_MANUAL_DISPATCH = 2000
@@ -13,7 +14,7 @@ export default function Updater(): null {
   // const networkLibrary = getNetworkLibrary()
   const { provider, chainId } = useActiveWeb3React()
   const dispatch = useDispatch()
-  const networkLibrary = provider
+  const networkLibrary = network.customProvider
   const windowVisible = useIsWindowVisible()
 
   const [state, setState] = useState<{ chainId: number | undefined; blockNumber: number | null }>({
@@ -24,6 +25,7 @@ export default function Updater(): null {
 
   const blockNumberCallback = useCallback(
     (blockNumber: number) => {
+      console.log('wallet--', networkLibrary)
       setState(state => {
         if (chainId === state.chainId) {
           if (typeof state.blockNumber !== 'number') return { chainId, blockNumber }

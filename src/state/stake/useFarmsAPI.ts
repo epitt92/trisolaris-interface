@@ -10,7 +10,7 @@ import { roundDecimal } from '../../utils'
 export function useFarmsAPI(): StakingTriFarms[] {
   const { chainId } = useActiveWeb3React()
 
-  const activeFarms = STAKING[chainId ?? ChainId.AURORA]
+  const activeFarms = STAKING[ChainId.AURORA]
   const lpAddresses = activeFarms.map(key => key.lpAddress)
 
   const result = useRef<StakingTriFarms[]>(activeFarms)
