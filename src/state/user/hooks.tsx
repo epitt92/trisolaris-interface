@@ -19,6 +19,7 @@ import {
 
 import { AppDispatch, AppState } from '../index'
 import { STAKING as trisolarisDefinedPools } from '../../state/stake/stake-constants'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 function serializeToken(token: Token): SerializedToken {
   return {
@@ -134,7 +135,8 @@ export function useRemoveUserAddedToken(): (chainId: number, address: string) =>
 }
 
 export function useUserAddedTokens(): Token[] {
-  const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
+  // const { chainId } = useActiveWeb3React()
   const serializedTokensMap = useSelector<AppState, AppState['user']['tokens']>(({ user: { tokens } }) => tokens)
 
   return useMemo(() => {

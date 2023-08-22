@@ -13,7 +13,7 @@ import { SUPPORTED_WALLETS } from '../../constants'
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
 import { getEtherscanLink } from '../../utils'
-import { coinbaseWallet, injected } from '../../connectors'
+import { NETWORK_CHAIN_ID, coinbaseWallet, injected } from '../../connectors'
 import Identicon from '../Identicon'
 import { ButtonSecondary } from '../Button'
 import { ExternalLink as LinkIcon } from 'react-feather'
@@ -219,7 +219,8 @@ export default function AccountDetails({
   ENSName,
   openOptions
 }: AccountDetailsProps) {
-  const { chainId, account, connector } = useActiveWeb3React()
+  const { account, connector } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   const theme = useContext(ThemeContext)
   const { t } = useTranslation()
   const dispatch = useDispatch<AppDispatch>()
