@@ -3,14 +3,15 @@ import { ChainId } from '@trisolaris/sdk'
 import { useWeb3React as useWeb3ReactCore } from '@web3-react/core'
 import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
-import { injected } from '../connectors'
+import { NETWORK_CHAIN_ID, injected } from '../connectors'
 import { NetworkContextName } from '../constants'
 
 export function useActiveWeb3React() {
   // const context = useWeb3ReactCore<Web3Provider>()
   // const contextNetwork = useWeb3ReactCore<Web3Provider>(NetworkContextName)
   // return context.active ? context : contextNetwork
-  return useWeb3ReactCore()
+  const result = useWeb3ReactCore()
+  return { ...result, chainId: result.chainId === NETWORK_CHAIN_ID ? result.chainId : undefined }
 }
 
 export function useEagerConnect() {

@@ -5,11 +5,11 @@ import { useActiveWeb3React } from '../../hooks'
 import { ChainId } from '@trisolaris/sdk'
 import { useFarmContractsForVersion } from './useFarmContractsForVersion'
 import { useFarmContractsForStableSwap } from './useFarmContractsForStableSwap'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 // gets the staking info from the network for the active chain id
 export function useFarms(): StakingTri[] {
-  const { chainId } = useActiveWeb3React()
-
+  // const { chainId } = useActiveWeb3React()
   const activeFarms = STAKING[ChainId.AURORA]
   const farms = useFarmsAPI()
   const stakingInfoV1 = useFarmContractsForVersion(ChefVersions.V1)

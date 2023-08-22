@@ -195,7 +195,7 @@ export function useFarmsPortfolio(farmIds?: number[]): Result | null {
 
     const { totalStakedInUSD, totalStaked } = stakingInfoData?.[index]
 
-    const userInfoPool = JSBI.BigInt(allUserInfo[index].result?.['amount'] ?? 0)
+    const userInfoPool = JSBI.BigInt(allUserInfo[index]?.result?.['amount'] ?? 0)
     const totalStakedTokenAmount = new TokenAmount(dummyToken, JSBI.BigInt(totalStaked))
     const lpToken = getLPToken(pairsResult[index][1] ?? null, stableSwapPoolName)
     const stakedAmount = new TokenAmount(lpToken, JSBI.BigInt(userInfoPool))

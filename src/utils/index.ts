@@ -81,6 +81,7 @@ export function getSigner(library: Web3Provider, account: string): JsonRpcSigner
 // account is optional
 export function getProviderOrSigner(library: Web3Provider, account?: string): Web3Provider | JsonRpcSigner {
   const { chainId } = useActiveWeb3React()
+  // const chainId = NETWORK_CHAIN_ID
   // @ts-ignore
   return account && chainId === NETWORK_CHAIN_ID ? getSigner(library, account) : network.customProvider
 }
