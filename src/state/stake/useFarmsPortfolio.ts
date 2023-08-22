@@ -37,7 +37,7 @@ type Result = {
 
 export function useFarmsPortfolio(farmIds?: number[]): Result | null {
   const farmsReady = farmIds?.length || true
-  const { chainId, account: userAccount } = useActiveWeb3React()
+  const { account: userAccount } = useActiveWeb3React()
   const account = userAccount ?? ZERO_ADDRESS
   const chain = ChainId.AURORA
   const activeFarms = STAKING[chain]

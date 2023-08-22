@@ -19,8 +19,8 @@ import { NETWORK_CHAIN_ID } from '../connectors'
 type TokensMap = { [address: string]: Token }
 
 export function useAllTokens(): TokensMap {
-  const chainId = NETWORK_CHAIN_ID
   // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_
   const userAddedTokens = useUserAddedTokens()
   const allTokens = useSelectedTokenList()
 

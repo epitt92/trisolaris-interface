@@ -179,7 +179,7 @@ export default function TransactionConfirmationModal({
   // const { chainId } = useActiveWeb3React()
   const chainId = NETWORK_CHAIN_ID
 
-  if (!chainId) return null
+  if (!chainId || chainId !== NETWORK_CHAIN_ID) return null
 
   // confirmation screen
   return (

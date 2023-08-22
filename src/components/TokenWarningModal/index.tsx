@@ -50,7 +50,7 @@ function TokenWarningCard({ token }: TokenWarningCardProps) {
   const { t } = useTranslation()
 
   const duplicateNameOrSymbol = useMemo(() => {
-    if (!token || !chainId) return false
+    if (!token || chainId !== NETWORK_CHAIN_ID) return false
 
     return Object.keys(allTokens).some(tokenAddress => {
       const userToken = allTokens[tokenAddress]

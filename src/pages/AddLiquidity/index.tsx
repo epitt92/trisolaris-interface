@@ -48,6 +48,7 @@ import { CardSection } from '../../components/earn/styled'
 import PriceAndPoolShare from './PriceAndPoolShare'
 import BalanceButtonValueEnum from '../../components/BalanceButton/BalanceButtonValueEnum'
 import useCurrencyInputPanel from '../../components/CurrencyInputPanel/useCurrencyInputPanel'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 export default function AddLiquidity({
   match: {
@@ -398,7 +399,7 @@ export default function AddLiquidity({
               />
             )}
 
-            {!account ? (
+            {!account || chainId !== NETWORK_CHAIN_ID ? (
               <ButtonLight onClick={toggleWalletModal}>{t('addLiquidity.connectWallet')}</ButtonLight>
             ) : (
               <AutoColumn id="defaultswap-add-liquidity" gap={'md'}>

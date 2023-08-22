@@ -99,8 +99,8 @@ export function useApproveCallback(
 
 // wraps useApproveCallback in the context of a swap
 export function useApproveCallbackFromTrade(trade?: Trade, allowedSlippage = 0) {
-  const chainId = NETWORK_CHAIN_ID
   // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   const amountToApprove = useMemo(
     () => (trade ? computeSlippageAdjustedAmounts(trade, allowedSlippage)[Field.INPUT] : undefined),
     [trade, allowedSlippage]

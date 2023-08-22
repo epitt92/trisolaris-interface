@@ -96,7 +96,6 @@ export function useStableSwapCallback(
 ): { state: StableSwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
   const { account, provider } = useActiveWeb3React()
   const chainId = NETWORK_CHAIN_ID
-
   const StableswapCalls = useStableSwapCallArguments(trade, allowedSlippage)
 
   const addTransaction = useTransactionAdder()
