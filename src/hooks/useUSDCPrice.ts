@@ -9,13 +9,15 @@ import { useActiveWeb3React } from '.'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
 import { useAuTokenContract } from './useContract'
 import { useSingleCallResult } from '../state/multicall/hooks'
+import { NETWORK_CHAIN_ID } from '../connectors'
 
 /**
  * Returns the price in USDC of the input currency
  * @param currency currency to compute the USDC price of
  */
 export default function useUSDCPrice(currency?: Currency): Price | undefined {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   const wrapped = wrappedCurrency(currency, chainId)
 
   // @ts-ignore

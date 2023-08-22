@@ -24,6 +24,7 @@ import { STAKING } from '../state/stake/stake-constants'
 import { isMetaPool, StableSwapPoolName, STABLESWAP_POOLS } from '../state/stableswap/constants'
 import PTRI_ABI from '../constants/abis/pTri/ptri.json'
 import AUERC20 from '../constants/abis/stableswap/auErc20.json'
+import { NETWORK_CHAIN_ID } from '../connectors'
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -53,7 +54,8 @@ export function useBridgeTokenContract(tokenAddress?: string, withSignerIfPossib
 }
 
 export function useWETHContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   // @ts-ignore
   return useContract(chainId ? WETH[chainId]?.address : undefined, WETH_ABI, withSignerIfPossible)
 }
@@ -71,7 +73,8 @@ export function usePairContract(pairAddress?: string, withSignerIfPossible?: boo
 }
 
 export function useMulticallContract(): Contract | null {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   // @ts-ignore
   return useContract(chainId && MULTICALL_NETWORKS[chainId], MULTICALL_ABI, false)
 }
@@ -111,8 +114,8 @@ export function useStableSwapContract(
   withSignerIfPossible = true,
   shouldUseUnwrappedTokens = false
 ): Contract | null {
-  const { chainId, provider } = useActiveWeb3React()
-
+  const { provider } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   const pool = poolName == null ? null : STABLESWAP_POOLS[poolName]
   const metaPool = useStableSwapMetaPoolDeposit(pool?.address, withSignerIfPossible)
   const metaPoolUnwrappedTokens = useStableSwapMetaPoolDeposit(pool?.metaSwapAddresses, withSignerIfPossible)
@@ -149,7 +152,8 @@ export function useStableSwapMetaPool(address?: string, withSignerIfPossible = t
 }
 
 export function usePTriContract(withSignerIfPossible = true): Contract | null {
-  const { chainId, provider } = useActiveWeb3React()
+  const { provider } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   const pTriContract = useContract(PTRI[ChainId.AURORA].address, PTRI_ABI, withSignerIfPossible)
 
   return useMemo(() => {

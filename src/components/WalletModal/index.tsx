@@ -412,7 +412,7 @@ export default function WalletModal({
         <CloseIcon onClick={toggleWalletModal}>
           <CloseColor />
         </CloseIcon>
-        {walletView === WALLET_VIEWS.ACCOUNT || !!account ? (
+        {walletView === WALLET_VIEWS.ACCOUNT || (!!account && chainId === NETWORK_CHAIN_ID) ? (
           <HeaderRow color="blue">
             <HoverText onClick={() => setWalletView(account ? WALLET_VIEWS.ACCOUNT : WALLET_VIEWS.OPTIONS)}>
               Back

@@ -11,6 +11,7 @@ import useTransactionDeadline from './useTransactionDeadline'
 import { StableSwapTrade, useSelectedStableSwapPool } from '../state/stableswap/hooks'
 import { useStableSwapContract } from './useContract'
 import { isMetaPool } from '../state/stableswap/constants'
+import { NETWORK_CHAIN_ID } from '../connectors'
 
 export enum StableSwapCallbackState {
   INVALID,
@@ -93,8 +94,8 @@ export function useStableSwapCallback(
   trade: StableSwapTrade | undefined, // trade to execute, required
   allowedSlippage: number = INITIAL_ALLOWED_SLIPPAGE // in bips
 ): { state: StableSwapCallbackState; callback: null | (() => Promise<string>); error: string | null } {
-  const { account, chainId, provider } = useActiveWeb3React()
-
+  const { account, provider } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   const StableswapCalls = useStableSwapCallArguments(trade, allowedSlippage)
 
   const addTransaction = useTransactionAdder()
