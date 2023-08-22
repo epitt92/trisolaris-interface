@@ -8,6 +8,7 @@ import { ExternalLink } from '../../theme'
 import { useAllTransactions } from '../../state/transactions/hooks'
 import { RowFixed } from '../Row'
 import Loader from '../Loader'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 const TransactionWrapper = styled.div``
 
@@ -37,7 +38,8 @@ const IconWrapper = styled.div<{ pending: boolean; success?: boolean }>`
 `
 
 export default function Transaction({ hash }: { hash: string }) {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   const allTransactions = useAllTransactions()
 
   const tx = allTransactions?.[hash]

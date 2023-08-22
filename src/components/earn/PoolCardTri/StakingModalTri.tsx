@@ -22,6 +22,7 @@ import { parseUnits } from '@ethersproject/units'
 import useTLP from '../../../hooks/useTLP'
 import useCurrencyInputPanel from '../../CurrencyInputPanel/useCurrencyInputPanel'
 import { getPairRenderOrder } from '../../../utils/pools'
+import { NETWORK_CHAIN_ID } from '../../../connectors'
 
 const ContentWrapper = styled(AutoColumn)`
   width: 100%;
@@ -51,7 +52,8 @@ export default function StakingModal({
   stakingRewardAddress,
   poolId
 }: StakingModalProps) {
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
 
   // track and parse user input
   const [typedValue, setTypedValue] = useState('')

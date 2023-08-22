@@ -7,6 +7,7 @@ import { AutoColumn } from '../Column'
 import { RowBetween } from '../Row'
 import { getEtherscanLink } from '../../utils'
 import { useTranslation } from 'react-i18next'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 const InputPanel = styled.div`
   ${({ theme }) => theme.flexColumnNoWrap}
@@ -77,7 +78,8 @@ export default function AddressInputPanel({
   // triggers whenever the typed value changes
   onChange: (value: string) => void
 }) {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   const theme = useContext(ThemeContext)
   const { t } = useTranslation()
 

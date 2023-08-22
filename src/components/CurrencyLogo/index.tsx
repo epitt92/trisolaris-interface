@@ -6,6 +6,7 @@ import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
 import { useActiveWeb3React } from '../../hooks'
 import Logo from '../Logo'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 export const getTokenLogoURL = (address: string) => {
   return [
@@ -40,7 +41,8 @@ export default function CurrencyLogo({
   size?: string
   style?: React.CSSProperties
 }) {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   const uriLocations = useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined)
 
   const srcs: string[] = useMemo(() => {

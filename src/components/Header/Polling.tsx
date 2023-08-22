@@ -5,6 +5,7 @@ import { TYPE, ExternalLink } from '../../theme'
 import { useBlockNumber } from '../../state/application/hooks'
 import { getEtherscanLink } from '../../utils'
 import { useActiveWeb3React } from '../../hooks'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 const StyledPolling = styled.div`
   position: fixed;
@@ -63,7 +64,8 @@ const Spinner = styled.div`
 `
 
 export default function Polling() {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
 
   const blockNumber = useBlockNumber()
 

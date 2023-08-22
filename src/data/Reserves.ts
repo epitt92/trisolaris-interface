@@ -6,6 +6,7 @@ import { useActiveWeb3React } from '../hooks'
 
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
+import { NETWORK_CHAIN_ID } from '../connectors'
 
 const PAIR_INTERFACE = new Interface(IUniswapV2Pair_ABI)
 
@@ -17,8 +18,9 @@ export enum PairState {
 }
 
 export function usePairs(currencies: [Currency | undefined, Currency | undefined][]): [PairState, Pair | null][] {
-  const { chainId } = useActiveWeb3React()
-
+  // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
+  console.log('curren', currencies)
   const tokens = useMemo(
     () =>
       currencies.map(([currencyA, currencyB]) => [

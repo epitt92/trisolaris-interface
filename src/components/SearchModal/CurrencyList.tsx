@@ -17,6 +17,7 @@ import { FadedSpan, MenuItem } from './styleds'
 import Loader from '../Loader'
 import { isTokenOnList } from '../../utils'
 import { useTranslation } from 'react-i18next'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 function currencyKey(currency: Currency): string {
   return currency instanceof Token ? currency.address : currency === CETH ? 'ETH' : ''
@@ -108,7 +109,8 @@ function CurrencyRow({
   otherSelected: boolean
   style: CSSProperties
 }) {
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
   const key = currencyKey(currency)
   const selectedTokenList = useSelectedTokenList()
   const isOnSelectedList = isTokenOnList(selectedTokenList, currency)
