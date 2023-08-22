@@ -14,11 +14,13 @@ import { wrappedCurrency } from '../utils/wrappedCurrency'
 import { useActiveWeb3React } from './index'
 import { useCalculateStableSwapPairs } from './useCalculateStableSwapPairs'
 import { useBytes32TokenContract, useTokenContract } from './useContract'
+import { NETWORK_CHAIN_ID } from '../connectors'
 
 type TokensMap = { [address: string]: Token }
 
 export function useAllTokens(): TokensMap {
-  const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
+  // const { chainId } = useActiveWeb3React()
   const userAddedTokens = useUserAddedTokens()
   const allTokens = useSelectedTokenList()
 
@@ -43,7 +45,8 @@ export function useAllTokens(): TokensMap {
 
 // Returns map of all tokens that are part of stable swap LP pools
 export function useAllStableSwapTokens(): TokensMap {
-  const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
+  // const { chainId } = useActiveWeb3React()
   const allTokens = useSelectedTokenList()
 
   return useMemo(() => {
@@ -74,7 +77,8 @@ export function useAllStableSwapTokens(): TokensMap {
 // When an input stable token is selected, returns a list of all valid output stables
 // When multiple pools for the same token are available, the highest TVL pool is chosen
 export function useAllValidStableSwapOutputTokens(): TokensMap {
-  const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
+  // const { chainId } = useActiveWeb3React()
   const allTokens = useSelectedTokenList()
   const calculateStableSwapPairs = useCalculateStableSwapPairs()
   const { currencies } = useDerivedStableSwapInfo()
@@ -117,7 +121,8 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
 // null if loading
 // otherwise returns the token
 export function useToken(tokenAddress?: string): Token | undefined | null {
-  const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
+  // const { chainId } = useActiveWeb3React()
   const tokens = useAllTokens()
 
   const address = isAddress(tokenAddress)

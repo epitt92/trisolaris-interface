@@ -13,6 +13,7 @@ import { AutoColumn } from '../Column'
 import { AlertTriangle } from 'react-feather'
 import { ButtonError } from '../Button'
 import { Trans, useTranslation } from 'react-i18next'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 const Wrapper = styled.div<{ error: boolean }>`
   background: ${({ theme }) => transparentize(0.6, theme.bg3)};
@@ -39,7 +40,8 @@ interface TokenWarningCardProps {
 }
 
 function TokenWarningCard({ token }: TokenWarningCardProps) {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
 
   const tokenSymbol = token?.symbol?.toLowerCase() ?? ''
   const tokenName = token?.name?.toLowerCase() ?? ''

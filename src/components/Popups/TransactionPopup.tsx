@@ -8,6 +8,7 @@ import { getEtherscanLink } from '../../utils'
 import { AutoColumn } from '../Column'
 import { AutoRow } from '../Row'
 import { useTranslation } from 'react-i18next'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 const RowNoFlex = styled(AutoRow)`
   flex-wrap: nowrap;
@@ -22,7 +23,8 @@ export default function TransactionPopup({
   success?: boolean
   summary?: string
 }) {
-  const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
+  // const { chainId } = useActiveWeb3React()
 
   const { t } = useTranslation()
   const theme = useContext(ThemeContext)

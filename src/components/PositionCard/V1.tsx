@@ -10,6 +10,7 @@ import { FixedHeightRow, HoverCard } from './PositionCard.styles'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { useActiveWeb3React } from '../../hooks'
 import { ThemeContext } from 'styled-components'
+import { NETWORK_CHAIN_ID } from '../../connectors'
 
 interface PositionCardProps extends RouteComponentProps<{}> {
   token: Token
@@ -19,7 +20,8 @@ interface PositionCardProps extends RouteComponentProps<{}> {
 function V1PositionCard({ token, V1LiquidityBalance }: PositionCardProps) {
   const theme = useContext(ThemeContext)
 
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
+  const chainId = NETWORK_CHAIN_ID
 
   return (
     <HoverCard>
