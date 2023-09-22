@@ -246,6 +246,7 @@ export default function WalletModal({
         await connector.activate()
 
         // dispatch(updateSelectedWallet({ wallet }))
+        window.localStorage.setItem('selectedWallet', wallet)
       } catch (error) {
         console.debug(`web3-react connection error: ${error}`)
         // dispatch(updateWalletError({ wallet, error: error.message }))

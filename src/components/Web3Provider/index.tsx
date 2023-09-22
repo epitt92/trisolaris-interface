@@ -4,10 +4,13 @@ import {
   BACKFILLABLE_WALLETS,
   NETWORK_CHAIN_ID,
   Wallet,
+  coinbaseWallet,
   getConnectorForWallet,
   gnosisSafe,
+  injected,
   network,
-  useConnectors
+  useConnectors,
+  walletConnect
 } from '../../connectors'
 import { ReactNode, useEffect } from 'react'
 import { useActiveWeb3React, useEagerConnect } from '../../hooks'
@@ -32,10 +35,18 @@ export default function Web3Provider({ children }: { children: ReactNode }) {
   // const connectors = getConne.map<[Connector, Web3ReactHooks]>(({ hooks, connector }) => [connector, hooks])
   const connectors = useConnectors(undefined)
   useEffect(() => {
+    const selectedWallet = window.localStorage.getItem('selectedWallet')
     // connect(gnosisSafe)
-
     connect(network)
-
+    if (selectedWallet === Wallet.INJECTED) {
+      connect(injected)
+    }
+    if (selectedWallet === Wallet.COINBASE_WALLET) {
+      connect(coinbaseWallet)
+    }
+    if (selectedWallet === Wallet.WALLET_CONNECT) {
+      connect(walletConnect)
+    }
     // if (selectedWallet) {
     //   connect(getConnectorForWallet(selectedWallet))
     // } else if (!selectedWalletBackfilled) {

@@ -119,6 +119,16 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#010101',
     primary: true
   },
+  BRAVE: {
+    connector: injected,
+    wallet: Wallet.INJECTED,
+    name: 'Bravel Wallet',
+    iconName: 'brave.png',
+    description: 'Easy-to-use browser extension.',
+    href: null,
+    color: '#010101',
+    primary: true
+  },
   METAMASK: {
     connector: injected,
     wallet: Wallet.INJECTED,
