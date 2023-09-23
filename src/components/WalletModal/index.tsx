@@ -308,7 +308,7 @@ export default function WalletModal({
                 icon={MetamaskIcon}
               />
             )
-          } else {
+          } else if (option.name !== 'Brave Wallet') {
             return null //dont want to return install twice
           }
         }

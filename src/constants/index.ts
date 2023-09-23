@@ -122,7 +122,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   BRAVE: {
     connector: injected,
     wallet: Wallet.INJECTED,
-    name: 'Bravel Wallet',
+    name: 'Brave Wallet',
     iconName: 'brave.png',
     description: 'Easy-to-use browser extension.',
     href: null,
